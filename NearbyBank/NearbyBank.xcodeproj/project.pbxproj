@@ -17,6 +17,8 @@
 		08F7DDC317C201E600B3111D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08F7DDC217C201E600B3111D /* Default@2x.png */; };
 		08F7DDC517C201E600B3111D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08F7DDC417C201E600B3111D /* Default-568h@2x.png */; };
 		08F7DDCC17C203B300B3111D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08F7DDCB17C203B300B3111D /* Storyboard.storyboard */; };
+		08F7DDCF17C2080300B3111D /* BIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F7DDCE17C2080300B3111D /* BIDViewController.m */; };
+		08F7DDD117C2090F00B3111D /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 08F7DDD017C2090F00B3111D /* blueButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,9 @@
 		08F7DDC217C201E600B3111D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		08F7DDC417C201E600B3111D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		08F7DDCB17C203B300B3111D /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		08F7DDCD17C2080300B3111D /* BIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDViewController.h; sourceTree = "<group>"; };
+		08F7DDCE17C2080300B3111D /* BIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDViewController.m; sourceTree = "<group>"; };
+		08F7DDD017C2090F00B3111D /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,9 @@
 				08F7DDBD17C201E600B3111D /* BIDAppDelegate.h */,
 				08F7DDBE17C201E600B3111D /* BIDAppDelegate.m */,
 				08F7DDCB17C203B300B3111D /* Storyboard.storyboard */,
+				08F7DDD017C2090F00B3111D /* blueButton.png */,
+				08F7DDCD17C2080300B3111D /* BIDViewController.h */,
+				08F7DDCE17C2080300B3111D /* BIDViewController.m */,
 				08F7DDB517C201E600B3111D /* Supporting Files */,
 			);
 			path = NearbyBank;
@@ -159,6 +167,7 @@
 				08F7DDC317C201E600B3111D /* Default@2x.png in Resources */,
 				08F7DDC517C201E600B3111D /* Default-568h@2x.png in Resources */,
 				08F7DDCC17C203B300B3111D /* Storyboard.storyboard in Resources */,
+				08F7DDD117C2090F00B3111D /* blueButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +180,7 @@
 			files = (
 				08F7DDBB17C201E600B3111D /* main.m in Sources */,
 				08F7DDBF17C201E600B3111D /* BIDAppDelegate.m in Sources */,
+				08F7DDCF17C2080300B3111D /* BIDViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
