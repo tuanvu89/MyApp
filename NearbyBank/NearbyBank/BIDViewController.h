@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BIDViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIButton *btnNearby;
+@property (strong, nonatomic) IBOutlet UIButton *btnBySuburb;
+@property (strong, nonatomic) IBOutlet UIButton *btnAdSearch;
 
 
 @end

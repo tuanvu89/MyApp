@@ -13,6 +13,9 @@
 @end
 
 @implementation BIDViewController
+@synthesize btnAdSearch;
+@synthesize btnBySuburb;
+@synthesize btnNearby;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +30,20 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    UIImage *btnImageNormal = [UIImage imageNamed:@"whiteButton.png"];
+    UIImage *btnImagePress = [UIImage imageNamed:@"BlueButton.png"];
+    
+    UIImage *stretchabeImgNormal = [btnImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    UIImage *stretchableImgPress = [btnImagePress stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    
+    [btnNearby setBackgroundImage:stretchabeImgNormal forState:UIControlStateNormal];
+    [btnAdSearch setBackgroundImage:stretchabeImgNormal forState:UIControlStateNormal];
+    [btnBySuburb setBackgroundImage:stretchabeImgNormal forState:UIControlStateNormal];
+    
+    [btnBySuburb setBackgroundImage:stretchableImgPress forState:UIControlStateHighlighted];
+    [btnAdSearch setBackgroundImage:stretchableImgPress forState:UIControlStateHighlighted];
+    [btnNearby setBackgroundImage:stretchableImgPress forState:UIControlStateHighlighted];
+    
     
 }
 
