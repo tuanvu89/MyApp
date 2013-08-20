@@ -25,7 +25,7 @@
             <objects>
                 <viewController storyboardIdentifier="BIDSuburbViewController" id="HLf-NW-Tww" customClass="BIDSuburbViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vFL-Ic-cN9">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="1u5-An-mA3">
@@ -53,7 +53,7 @@
             <objects>
                 <viewController id="vHB-Zm-TQp" customClass="BIDViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pAv-OH-86q">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nearby Bank" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a36-E5-sjR">
@@ -112,20 +112,21 @@
                         </subviews>
                         <color key="backgroundColor" red="0.98183564680000002" green="1" blue="0.99186293290000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="a36-E5-sjR" firstAttribute="top" secondItem="pAv-OH-86q" secondAttribute="top" constant="49" id="7Bs-mh-26w"/>
                             <constraint firstAttribute="trailing" secondItem="Rgu-NS-NJc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="9j0-7z-WAj"/>
                             <constraint firstItem="Rgu-NS-NJc" firstAttribute="top" secondItem="9h5-qw-ock" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ap7-fK-3eo"/>
                             <constraint firstItem="Rgu-NS-NJc" firstAttribute="leading" secondItem="pAv-OH-86q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="FVC-Q6-KSN"/>
                             <constraint firstAttribute="trailing" secondItem="jbj-ne-Bhx" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="GH9-nV-Pj4"/>
                             <constraint firstItem="jbj-ne-Bhx" firstAttribute="leading" secondItem="pAv-OH-86q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="JmM-tt-hCg"/>
+                            <constraint firstItem="a36-E5-sjR" firstAttribute="leading" secondItem="pAv-OH-86q" secondAttribute="leading" constant="26" id="S8a-6o-9ih"/>
                             <constraint firstItem="jbj-ne-Bhx" firstAttribute="top" secondItem="Rgu-NS-NJc" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="cDz-JC-MzQ"/>
-                            <constraint firstItem="a36-E5-sjR" firstAttribute="top" secondItem="pAv-OH-86q" secondAttribute="top" constant="119" id="dw7-Bq-F2A"/>
                             <constraint firstAttribute="trailing" secondItem="9h5-qw-ock" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="j8e-Hl-DHX"/>
                             <constraint firstItem="9h5-qw-ock" firstAttribute="leading" secondItem="pAv-OH-86q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="mhI-hu-Tgr"/>
-                            <constraint firstItem="9h5-qw-ock" firstAttribute="centerX" secondItem="a36-E5-sjR" secondAttribute="centerX" type="default" id="nhm-nR-GLf"/>
                             <constraint firstAttribute="bottom" secondItem="jbj-ne-Bhx" secondAttribute="bottom" constant="39" id="w0r-Lt-MhN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="o7d-Ql-2AF"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="btnAdSearch" destination="jbj-ne-Bhx" id="FYH-ps-OUk"/>
                         <outlet property="btnBySuburb" destination="Rgu-NS-NJc" id="eHe-yR-BKV"/>
@@ -141,20 +142,30 @@
             <objects>
                 <viewController storyboardIdentifier="BIDNearbyViewController" id="QR2-7B-e7g" customClass="BIDNearbyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TMI-Sy-FLB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XM0-cO-4Cd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XM0-cO-4Cd" customClass="BIDNearby">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mapView key="tableFooterView" hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="jta-dh-lrB">
+                                    <rect key="frame" x="0.0" y="80" width="320" height="460"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="QR2-7B-e7g" id="BVI-WW-CjL"/>
+                                    </connections>
+                                </mapView>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="bankResultCell" id="E4P-sx-prd">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="bankResultCell" rowHeight="58" id="E4P-sx-prd">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="my bank" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTA-ou-a1S">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="Label 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJG-yP-wbo">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="7tZ-Jp-4bT"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -163,12 +174,16 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="jTA-ou-a1S" firstAttribute="leading" secondItem="E4P-sx-prd" secondAttribute="leading" constant="20" type="default" id="cG2-1r-3QN"/>
-                                            <constraint firstItem="jTA-ou-a1S" firstAttribute="top" secondItem="E4P-sx-prd" secondAttribute="top" constant="2" id="kTN-xr-l7z"/>
+                                            <constraint firstItem="KJG-yP-wbo" firstAttribute="leading" secondItem="E4P-sx-prd" secondAttribute="leading" constant="25" id="ARg-qr-Up5"/>
+                                            <constraint firstItem="KJG-yP-wbo" firstAttribute="top" secondItem="E4P-sx-prd" secondAttribute="top" constant="15" id="Hnq-iP-TAY"/>
                                         </constraints>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="QR2-7B-e7g" id="zZG-2z-k65"/>
+                                    <outlet property="delegate" destination="QR2-7B-e7g" id="kcT-HD-7Bz"/>
+                                </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3F-Jc-97H">
                                 <items>
@@ -181,6 +196,9 @@
                                                 <segment title="List"/>
                                                 <segment title="Map"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="segmentValueChange:" destination="QR2-7B-e7g" eventType="valueChanged" id="0fO-Nb-7td"/>
+                                            </connections>
                                         </segmentedControl>
                                     </barButtonItem>
                                     <barButtonItem title="Refine" id="3GP-HM-Wsb"/>
@@ -199,15 +217,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2YJ-iO-uqA"/>
+                    <connections>
+                        <outlet property="mapView" destination="jta-dh-lrB" id="2Yb-MW-rCs"/>
+                        <outlet property="nearbyTable" destination="XM0-cO-4Cd" id="1h1-BH-adD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTY-Mg-BGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-567" y="-1416"/>
+            <point key="canvasLocation" x="-611" y="-1416"/>
         </scene>
     </scenes>
     <classes>
         <class className="BIDNearbyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDNearbyViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="segmentValueChange:"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="nearbyTable" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="BIDSuburbViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDSuburbViewController.h"/>

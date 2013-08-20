@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08ECB36917C31ACA002D1138 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ECB36817C31ACA002D1138 /* MapKit.framework */; };
 		08F7DDAF17C201E600B3111D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDAE17C201E600B3111D /* UIKit.framework */; };
 		08F7DDB117C201E600B3111D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB017C201E600B3111D /* Foundation.framework */; };
 		08F7DDB317C201E600B3111D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB217C201E600B3111D /* CoreGraphics.framework */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08ECB36817C31ACA002D1138 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		08F7DDAB17C201E600B3111D /* NearbyBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F7DDAE17C201E600B3111D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		08F7DDB017C201E600B3111D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08ECB36917C31ACA002D1138 /* MapKit.framework in Frameworks */,
 				08F7DDAF17C201E600B3111D /* UIKit.framework in Frameworks */,
 				08F7DDB117C201E600B3111D /* Foundation.framework in Frameworks */,
 				08F7DDB317C201E600B3111D /* CoreGraphics.framework in Frameworks */,
@@ -66,6 +69,7 @@
 		08F7DDA217C201E600B3111D = {
 			isa = PBXGroup;
 			children = (
+				08ECB36817C31ACA002D1138 /* MapKit.framework */,
 				08F7DDB417C201E600B3111D /* NearbyBank */,
 				08F7DDAD17C201E600B3111D /* Frameworks */,
 				08F7DDAC17C201E600B3111D /* Products */,

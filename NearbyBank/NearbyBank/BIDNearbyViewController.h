@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface BIDNearbyViewController : UIViewController
+@interface BIDNearbyViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (weak, nonatomic) IBOutlet UITableView *nearbyTable;
 
 @property (strong, nonatomic) NSString *searchInfo;
+@property (strong, nonatomic) NSArray *listData;
+
+- (IBAction)segmentValueChange:(id)sender;
+
 @end
