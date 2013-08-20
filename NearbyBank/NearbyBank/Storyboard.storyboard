@@ -51,7 +51,6 @@
         <!--View Controller-->
         <scene sceneID="iPu-gf-J3J">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pZM-GG-PYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="vHB-Zm-TQp" customClass="BIDViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pAv-OH-86q">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
@@ -106,6 +105,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="QR2-7B-e7g" kind="push" id="un6-ky-7bf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98183564680000002" green="1" blue="0.99186293290000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -130,6 +132,7 @@
                         <outlet property="btnNearby" destination="9h5-qw-ock" id="Cgf-By-AcU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pZM-GG-PYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1091" y="-1416"/>
         </scene>
@@ -138,67 +141,72 @@
             <objects>
                 <viewController storyboardIdentifier="BIDNearbyViewController" id="QR2-7B-e7g" customClass="BIDNearbyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TMI-Sy-FLB">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XM0-cO-4Cd">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="bankResultCell" id="E4P-sx-prd">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="my bank" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTA-ou-a1S">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="jTA-ou-a1S" firstAttribute="leading" secondItem="E4P-sx-prd" secondAttribute="leading" constant="20" type="default" id="cG2-1r-3QN"/>
+                                            <constraint firstItem="jTA-ou-a1S" firstAttribute="top" secondItem="E4P-sx-prd" secondAttribute="top" constant="2" id="kTN-xr-l7z"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3F-Jc-97H">
+                                <items>
+                                    <barButtonItem enabled="NO" width="75" systemItem="fixedSpace" id="SkY-dZ-sgq"/>
+                                    <barButtonItem style="plain" id="NAL-pk-oUJ">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="bKC-9w-OyD">
+                                            <rect key="frame" x="81" y="8" width="161" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="List"/>
+                                                <segment title="Map"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem title="Refine" id="3GP-HM-Wsb"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XM0-cO-4Cd" firstAttribute="bottom" secondItem="c3F-Jc-97H" secondAttribute="top" type="default" id="X1c-LU-Vs7"/>
+                            <constraint firstItem="c3F-Jc-97H" firstAttribute="trailing" secondItem="TMI-Sy-FLB" secondAttribute="trailing" type="default" id="ZFZ-Om-DX0"/>
+                            <constraint firstItem="XM0-cO-4Cd" firstAttribute="trailing" secondItem="TMI-Sy-FLB" secondAttribute="trailing" type="default" id="ePU-RZ-MIG"/>
+                            <constraint firstItem="XM0-cO-4Cd" firstAttribute="leading" secondItem="TMI-Sy-FLB" secondAttribute="leading" type="default" id="sYN-EV-XUK"/>
+                            <constraint firstItem="c3F-Jc-97H" firstAttribute="leading" secondItem="TMI-Sy-FLB" secondAttribute="leading" type="default" id="urO-5g-Pde"/>
+                            <constraint firstItem="c3F-Jc-97H" firstAttribute="bottom" secondItem="TMI-Sy-FLB" secondAttribute="bottom" type="default" id="v1k-Hf-Q9i"/>
+                            <constraint firstItem="XM0-cO-4Cd" firstAttribute="top" secondItem="TMI-Sy-FLB" secondAttribute="top" type="default" id="vRi-xr-92d"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="2YJ-iO-uqA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTY-Mg-BGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-567" y="-1416"/>
         </scene>
-        <!--View Controller - Item 2-->
-        <scene sceneID="hPd-Mf-aZW">
-            <objects>
-                <viewController id="DoT-3l-yON" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VEJ-eA-Ycb">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="KIS-Ed-ghS"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZYa-ff-aXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="495" y="-1425"/>
-        </scene>
-        <!--View Controller - Item 1-->
-        <scene sceneID="Cuq-VG-AgH">
-            <objects>
-                <viewController id="2bg-Zs-dTz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zMG-n5-40j">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="aLX-dP-wsv"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sdZ-Jo-sD0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="495" y="-2078"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="6Of-Mr-NgF">
-            <objects>
-                <tabBarController definesPresentationContext="YES" id="ZlD-wT-vMf" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="wJ0-ua-H1y">
-                        <rect key="frame" x="129" y="330" width="163" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="2bg-Zs-dTz" kind="relationship" relationship="viewControllers" id="BpM-Ky-gs8"/>
-                        <segue destination="DoT-3l-yON" kind="relationship" relationship="viewControllers" id="esQ-Jd-RhJ"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="852-X0-UFn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-51" y="-1797"/>
-        </scene>
     </scenes>
     <classes>
-        <class className="BIDNearbyViewController" superclassName="UITableViewController">
+        <class className="BIDNearbyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDNearbyViewController.h"/>
         </class>
         <class className="BIDSuburbViewController" superclassName="UIViewController">

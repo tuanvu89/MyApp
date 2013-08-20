@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BIDNearbyViewController : UITableViewController
+@interface BIDNearbyViewController : UIViewController
 
 @property (strong, nonatomic) NSString *searchInfo;
 @end
