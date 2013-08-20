@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08ECB36917C31ACA002D1138 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ECB36817C31ACA002D1138 /* MapKit.framework */; };
+		08ECB36F17C3548A002D1138 /* BIDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */; };
 		08F7DDAF17C201E600B3111D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDAE17C201E600B3111D /* UIKit.framework */; };
 		08F7DDB117C201E600B3111D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB017C201E600B3111D /* Foundation.framework */; };
 		08F7DDB317C201E600B3111D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB217C201E600B3111D /* CoreGraphics.framework */; };
@@ -27,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		08ECB36817C31ACA002D1138 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDDetailViewController.h; sourceTree = "<group>"; };
+		08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDDetailViewController.m; sourceTree = "<group>"; };
 		08F7DDAB17C201E600B3111D /* NearbyBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F7DDAE17C201E600B3111D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		08F7DDB017C201E600B3111D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -109,6 +112,8 @@
 				08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */,
 				08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */,
 				08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */,
+				08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */,
+				08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */,
 			);
 			path = NearbyBank;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				08F7DDCF17C2080300B3111D /* BIDViewController.m in Sources */,
 				08F7DDD617C2214200B3111D /* BIDSuburbViewController.m in Sources */,
 				08F7DDD917C222E000B3111D /* BIDNearbyViewController.m in Sources */,
+				08ECB36F17C3548A002D1138 /* BIDDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

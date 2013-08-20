@@ -17,7 +17,7 @@
 
 @implementation BIDNearbyViewController
 @synthesize nearbyTable;
-@synthesize mapView;
+@synthesize mapView = _mapView;
 @synthesize listData;
 
 
@@ -53,12 +53,12 @@
     if([sender selectedSegmentIndex] == 0)
     {
         nearbyTable.hidden = NO;
-        mapView.hidden = YES;
+        self.mapView.hidden = YES;
         
     }else
     {
         nearbyTable.hidden = YES;
-        mapView.hidden = NO;
+        self.mapView.hidden = NO;
     }
 }
 
@@ -87,38 +87,29 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 40.740848;
-    zoomLocation.longitude= -73.991145;
-
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.3*METERS_PER_MILE, 0.3*METERS_PER_MILE);
-    [self.mapView setRegion:viewRegion animated:YES];
 }
 
 #pragma mark -MapView Delegate Methods
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
 
-    if([annotation isKindOfClass:[MKUserLocation class]])
-        return nil;
-    
-
-    static NSString *identifier = @"myAnnotation";
-    MKPinAnnotationView * annotationView = (MKPinAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if (!annotationView)
-    {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        annotationView.pinColor = MKPinAnnotationColorPurple;
-        annotationView.animatesDrop = YES;
-        annotationView.canShowCallout = YES;
-    }else {
-        annotationView.annotation = annotation;
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    for(MKAnnotationView *annotationView in views) {
+        if(annotationView.annotation == mapView.userLocation) {
+            MKCoordinateRegion region;
+            MKCoordinateSpan span;
+            
+            span.latitudeDelta=0.1;
+            span.longitudeDelta=0.1;
+            
+            CLLocationCoordinate2D location=mapView.userLocation.coordinate;
+            
+            region.span=span;
+            region.center=location;
+            
+            [mapView setRegion:region animated:TRUE];
+            [mapView regionThatFits:region];
+        }
     }
-    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    return annotationView;
 }
-
-
 
 @end
