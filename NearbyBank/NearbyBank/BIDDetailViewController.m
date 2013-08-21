@@ -13,6 +13,8 @@
 @end
 
 @implementation BIDDetailViewController
+@synthesize nameLabel,addressLabel,btnGetDirect,btnPhone,btnViewMap, name, address, phone;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +29,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    nameLabel.text = name;
+    addressLabel.text = address;
+    [btnPhone setTitle:phone forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning

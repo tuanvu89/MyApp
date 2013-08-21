@@ -283,10 +283,14 @@
 		08F7DDC917C201E600B3111D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cliffard Viegas (CD26U536CC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cliffard Viegas (CD26U536CC)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NearbyBank/NearbyBank-Prefix.pch";
 				INFOPLIST_FILE = "NearbyBank/NearbyBank-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "BA7A4DB4-62D3-4FAC-A01F-62A34B3C09AA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BA7A4DB4-62D3-4FAC-A01F-62A34B3C09AA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -294,10 +298,14 @@
 		08F7DDCA17C201E600B3111D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cliffard Viegas (CD26U536CC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cliffard Viegas (CD26U536CC)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NearbyBank/NearbyBank-Prefix.pch";
 				INFOPLIST_FILE = "NearbyBank/NearbyBank-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "BA7A4DB4-62D3-4FAC-A01F-62A34B3C09AA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BA7A4DB4-62D3-4FAC-A01F-62A34B3C09AA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

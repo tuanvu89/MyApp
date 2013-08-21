@@ -10,4 +10,14 @@
 
 @interface BIDDetailViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UIButton *btnPhone;
+@property (weak, nonatomic) IBOutlet UIButton *btnViewMap;
+@property (weak, nonatomic) IBOutlet UIButton *btnGetDirect;
+
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *address;
+@property (strong, nonatomic) NSString *phone;
+
 @end

@@ -40,7 +40,7 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"search button clicked");
     //1
-//    [self performSegueWithIdentifier:@"SegueNearby" sender:nil];
+//    [self performSegueWithIdentifier:@"BIDNearbyViewController" sender:nil];
     
     //2
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
@@ -49,11 +49,11 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"SegueNearby"]) {
-        BIDNearbyViewController *controller = segue.destinationViewController;
-        controller.searchInfo = @"asdasd";
-    }
-}
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"BIDNearbyViewController"]) {
+//        BIDNearbyViewController *controller = segue.destinationViewController;
+//        controller.searchInfo = @"asdasd";
+//    }
+//}
 
 @end
