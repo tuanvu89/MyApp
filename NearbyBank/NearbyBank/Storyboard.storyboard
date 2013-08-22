@@ -292,6 +292,9 @@
                                     <color key="titleColor" red="0.95461973850000004" green="0.0" blue="0.01035858483" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="calling:" destination="7cV-dj-G5l" eventType="touchUpInside" id="Lv7-uX-LMN"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="lur-VO-Nq9">
                                 <constraints>
@@ -350,6 +353,7 @@
         <class className="BIDDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="calling:"/>
                 <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="btnGetDirect" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="btnPhone" candidateClass="UIButton"/>
@@ -360,6 +364,7 @@
         <class className="BIDNearbyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDNearbyViewController.h"/>
             <relationships>
+                <relationship kind="action" name="calling:"/>
                 <relationship kind="action" name="segmentValueChange:"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="nearbyTable" candidateClass="UITableView"/>

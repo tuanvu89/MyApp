@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *address;
-@property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) NSString *refecenceString;
+- (IBAction)calling:(id)sender;
 
 @end

@@ -9,15 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface BIDNearbyViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
-
+@interface BIDNearbyViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate>
+{
+    CLLocationManager *locationManager;
+    CLLocationCoordinate2D currentCentre;
+    int currenDist;
+}
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
 @property (weak, nonatomic) IBOutlet UITableView *nearbyTable;
-
 @property (strong, nonatomic) NSString *searchInfo;
+@property (strong, nonatomic) NSString *referenceString; //to query detail place
 @property (strong, nonatomic) NSArray *listData;
-
 - (IBAction)segmentValueChange:(id)sender;
 
 @end
