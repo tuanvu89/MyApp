@@ -18,7 +18,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdf-Gi-AWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1541" y="-1407"/>
+            <point key="canvasLocation" x="-1553" y="-1781"/>
         </scene>
         <!--Suburb View Controller - By Suburb-->
         <scene sceneID="TzR-Yr-QDt">
@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nO5-yf-Ehm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-611" y="-2173"/>
+            <point key="canvasLocation" x="-611" y="-2171"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="iPu-gf-J3J">
@@ -135,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZM-GG-PYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1091" y="-1416"/>
+            <point key="canvasLocation" x="-1133" y="-1774"/>
         </scene>
         <!--Nearby View Controller-->
         <scene sceneID="3o2-Ej-kNl">
@@ -234,11 +234,12 @@
                     <connections>
                         <outlet property="mapView" destination="jta-dh-lrB" id="2Yb-MW-rCs"/>
                         <outlet property="nearbyTable" destination="XM0-cO-4Cd" id="1h1-BH-adD"/>
+                        <outlet property="switcher" destination="bKC-9w-OyD" id="hiw-ku-a2T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTY-Mg-BGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-611" y="-1416"/>
+            <point key="canvasLocation" x="-611" y="-1436"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="L51-dF-lXG">
@@ -281,6 +282,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="QR2-7B-e7g" kind="push" id="GAo-iQ-5u0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejw-xY-ib6">
                                 <constraints>
@@ -346,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUS-H3-74r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-164" y="-1412"/>
+            <point key="canvasLocation" x="-64" y="-1416"/>
         </scene>
     </scenes>
     <classes>
@@ -364,10 +368,10 @@
         <class className="BIDNearbyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDNearbyViewController.h"/>
             <relationships>
-                <relationship kind="action" name="calling:"/>
                 <relationship kind="action" name="segmentValueChange:"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="nearbyTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="switcher" candidateClass="UISegmentedControl"/>
             </relationships>
         </class>
         <class className="BIDSuburbViewController" superclassName="UIViewController">
@@ -390,4 +394,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="un6-ky-7bf"/>
+    </inferredMetricsTieBreakers>
 </document>

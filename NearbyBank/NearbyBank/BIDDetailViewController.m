@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 kerofrog. All rights reserved.
 //
 
+#import "BIDNearbyViewController.h"
 #import "BIDDetailViewController.h"
 
 
@@ -76,5 +77,11 @@
     }else{
         [self.btnPhone setTitle:@"Phone Number not found" forState:UIControlStateNormal];
     }
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    BIDNearbyViewController *controller = segue.destinationViewController;
+    controller.IDViewer = @"BIDDetailViewController";
 }
 @end

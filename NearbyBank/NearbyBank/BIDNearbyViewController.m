@@ -24,6 +24,8 @@
 @synthesize nearbyTable;
 @synthesize mapView;
 @synthesize listData;
+@synthesize IDViewer;
+@synthesize indexOfTableReturn;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,24 +39,30 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+        [super viewDidLoad];
+        // Do any additional setup after loading the view.
+        self.mapView.delegate = self;
+        // Ensure that you can view your own location in the map view.
+        [self.mapView setShowsUserLocation:YES];
     
-    self.mapView.delegate = self;
-    // Ensure that you can view your own location in the map view.
-    [self.mapView setShowsUserLocation:YES];
+        //Instantiate a location object.
+        locationManager = [[CLLocationManager alloc] init];
+        
+        //Make this controller the delegate for the location manager.
+        [locationManager setDelegate:self];
+        
+        //Set some parameters for the location object.
+        [locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
-    //Instantiate a location object.
-    locationManager = [[CLLocationManager alloc] init];
+        if ([self.IDViewer isEqual: @"BIDDetailViewController"])
+        {
+            [self.switcher setSelectedSegmentIndex:1];
+            nearbyTable.hidden = YES;
+            self.mapView.hidden = NO;
+        }
     
-    //Make this controller the delegate for the location manager.
-    [locationManager setDelegate:self];
     
-    //Set some parameters for the location object.
-    [locationManager setDistanceFilter:kCLDistanceFilterNone];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,14 +70,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     self.listData= nil;
+    self.IDViewer = nil;
+    //self.mapView = nil;
+    self.nearbyTable = nil;
 }
 
 #pragma JSON
 
 -(void) queryGooglePlaces: (NSString *) googleType {
-
+    NSString *url = @"";
+    if ([self.IDViewer isEqual: @"BIDSuburbViewController"])
+    {
+        NSLog(@"url search -----------------");
+        url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", self.searchInfo, currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+    }else
+    {
+        url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+    }
     
-    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
     
     NSLog(@"%@", url);
 
@@ -227,6 +245,7 @@
         
         // 5 - Create a new annotation.
         BIDMapPoint *placeObject = [[BIDMapPoint alloc] initWithName:name address:vicinity coordinate:placeCoord];
+        
         [self.mapView addAnnotation:placeObject];
     }
 }
@@ -237,6 +256,7 @@
 {
     BIDDetailViewController *controller = segue.destinationViewController;
     NSIndexPath *indexPath = [nearbyTable indexPathForCell:sender];
+    indexOfTableReturn = indexPath.row;
     
     controller.name = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"name"];
     controller.address = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"vicinity"];

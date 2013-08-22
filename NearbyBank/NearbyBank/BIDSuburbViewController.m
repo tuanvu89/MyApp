@@ -45,6 +45,7 @@
     //2
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
     controller.searchInfo = searchBar.text;
+    controller.IDViewer = @"BIDSuburbViewController";
     
     [self.navigationController pushViewController:controller animated:YES];
 }
