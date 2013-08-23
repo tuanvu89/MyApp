@@ -20,13 +20,15 @@
 
 @end
 
+
 @implementation BIDNearbyViewController
 @synthesize nearbyTable;
 @synthesize mapView;
 @synthesize listData;
-@synthesize IDViewer;
+@synthesize IDViewerReturn;
 @synthesize indexOfTableReturn;
 
+static NSString* addressFormat = @"vicinity";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,14 +57,10 @@
         [locationManager setDistanceFilter:kCLDistanceFilterNone];
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
-        if ([self.IDViewer isEqual: @"BIDDetailViewController"])
-        {
-            [self.switcher setSelectedSegmentIndex:1];
-            nearbyTable.hidden = YES;
-            self.mapView.hidden = NO;
-        }
-    
-    
+    if ([IDViewerReturn isEqualToString:@"BIDSuburbViewController"]) {
+        addressFormat = @"formatted_address";
+    }
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,23 +68,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     self.listData= nil;
-    self.IDViewer = nil;
-    //self.mapView = nil;
+    self.IDViewerReturn = nil;
+    self.mapView = nil;
     self.nearbyTable = nil;
+    
 }
 
 #pragma JSON
 
 -(void) queryGooglePlaces: (NSString *) googleType {
+    
     NSString *url = @"";
-    if ([self.IDViewer isEqual: @"BIDSuburbViewController"])
+    
+    if ([self.IDViewerReturn isEqualToString: @"BIDSuburbViewController"])
     {
         NSLog(@"url search -----------------");
         url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", self.searchInfo, currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
-    }else
-    {
-        url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
     }
+    else
+   {
+        url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+   }
     
     
     NSLog(@"%@", url);
@@ -156,7 +158,7 @@
     if(listData != nil)
     {
         nameLabel.text = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"name"];
-        addressLabel.text = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"vicinity"];
+        addressLabel.text = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:addressFormat];
     }
     
     return cell;
@@ -178,8 +180,8 @@
             MKCoordinateRegion region;
             MKCoordinateSpan span;
             
-            span.latitudeDelta=0.1;
-            span.longitudeDelta=0.1;
+            span.latitudeDelta=0.05;
+            span.longitudeDelta=0.05;
             
             CLLocationCoordinate2D location= self.mapView.userLocation.coordinate;
             
@@ -196,11 +198,11 @@
     
     //Get the east and west points on the map so you can calculate the distance (zoom level) of the current map view.
     MKMapRect mRect = self.mapView.visibleMapRect;
-    MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
-    MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
+    MKMapPoint southMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMinY(mRect));
+    MKMapPoint northMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMaxY(mRect));
     
     //Set your current distance instance variable.
-    currenDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
+    currenDist = MKMetersBetweenMapPoints(southMapPoint, northMapPoint)/2;
     
     //Set your current center point on the map instance variable.
     currentCentre = self.mapView.centerCoordinate;
@@ -209,8 +211,10 @@
     NSLog(@"lo %f", currentCentre.longitude);
     NSLog(@"%d",currenDist);
     
-    //load json
-    [self queryGooglePlaces:@"bank"];
+    //load when radius from center not exceed 40 km
+    if (currenDist < 40000) {
+      [self queryGooglePlaces:@"bank"];
+    }
 
 }
 
@@ -234,7 +238,7 @@
         
         // 4 - Get your name and address info for adding to a pin.
         NSString *name=[place objectForKey:@"name"];
-        NSString *vicinity=[place objectForKey:@"vicinity"];
+        NSString *address=[place objectForKey:addressFormat];
         
         // Create a special variable to hold this coordinate info.
         CLLocationCoordinate2D placeCoord;
@@ -244,9 +248,9 @@
         placeCoord.longitude=[[loc objectForKey:@"lng"] doubleValue];
         
         // 5 - Create a new annotation.
-        BIDMapPoint *placeObject = [[BIDMapPoint alloc] initWithName:name address:vicinity coordinate:placeCoord];
+        BIDMapPoint *placeObject = [[BIDMapPoint alloc] initWithName:name address:address coordinate:placeCoord];
         
-        [self.mapView addAnnotation:placeObject];
+        [self.mapView addAnnotation:(id)placeObject];
     }
 }
 
@@ -257,9 +261,7 @@
     BIDDetailViewController *controller = segue.destinationViewController;
     NSIndexPath *indexPath = [nearbyTable indexPathForCell:sender];
     indexOfTableReturn = indexPath.row;
-    
-    controller.name = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"name"];
-    controller.address = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"vicinity"];
+
     controller.refecenceString = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"reference"];
     
 }

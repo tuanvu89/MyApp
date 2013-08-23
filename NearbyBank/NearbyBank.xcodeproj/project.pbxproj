@@ -107,9 +107,9 @@
 		08F7DDB417C201E600B3111D /* NearbyBank */ = {
 			isa = PBXGroup;
 			children = (
+				08F7DDCB17C203B300B3111D /* Storyboard.storyboard */,
 				08F7DDBD17C201E600B3111D /* BIDAppDelegate.h */,
 				08F7DDBE17C201E600B3111D /* BIDAppDelegate.m */,
-				08F7DDCB17C203B300B3111D /* Storyboard.storyboard */,
 				08F7DDD017C2090F00B3111D /* blueButton.png */,
 				08F7DDD217C2119200B3111D /* whiteButton.png */,
 				08F7DDCD17C2080300B3111D /* BIDViewController.h */,

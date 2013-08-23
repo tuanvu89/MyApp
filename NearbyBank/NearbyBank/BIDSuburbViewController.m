@@ -39,13 +39,13 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"search button clicked");
-    //1
+    //1 - cach 1 : perform view controll ke tiep voi identifier
 //    [self performSegueWithIdentifier:@"BIDNearbyViewController" sender:nil];
     
-    //2
+    //2 - tao 1 the hien cua controll ke tiep va dat vao navigation controller
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
-    controller.searchInfo = searchBar.text;
-    controller.IDViewer = @"BIDSuburbViewController";
+    controller.searchInfo = [searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    controller.IDViewerReturn = @"BIDSuburbViewController";
     
     [self.navigationController pushViewController:controller animated:YES];
 }

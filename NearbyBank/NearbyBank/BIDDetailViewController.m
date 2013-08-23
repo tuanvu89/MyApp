@@ -34,8 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    nameLabel.text = name;
-    addressLabel.text = address;
+
     [self queryPlaceInformation:refecenceString];
 }
 
@@ -48,6 +47,13 @@
 - (IBAction)calling:(id)sender {
     NSString *phoneNumber = [NSString stringWithFormat:@"tel://%@" , btnPhone.titleLabel.text];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+}
+
+- (IBAction)btnViewOnMapTouch:(id)sender {
+    BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
+    controller.IDViewerReturn = @"BIDDetailViewController";
+    
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 
@@ -71,17 +77,15 @@
     //get phone number from (dic) json variable obtain with the key "formatted_phone_number"
     NSDictionary* detail = [json objectForKey:@"result"];
     NSString* phoneNumber = [detail objectForKey:@"international_phone_number"];
+    
     NSLog(@"so dien thoai %@", phoneNumber);
     if(phoneNumber != nil){
         [self.btnPhone setTitle:phoneNumber forState:UIControlStateNormal];
     }else{
         [self.btnPhone setTitle:@"Phone Number not found" forState:UIControlStateNormal];
     }
-}
-
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    BIDNearbyViewController *controller = segue.destinationViewController;
-    controller.IDViewer = @"BIDDetailViewController";
+    
+    nameLabel.text = [detail objectForKey:@"name"];
+    addressLabel.text = [detail objectForKey:@"formatted_address"];
 }
 @end

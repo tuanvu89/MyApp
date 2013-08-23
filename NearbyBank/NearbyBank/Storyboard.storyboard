@@ -283,7 +283,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="QR2-7B-e7g" kind="push" id="GAo-iQ-5u0"/>
+                                    <action selector="btnViewOnMapTouch:" destination="7cV-dj-G5l" eventType="touchUpInside" id="WcQ-u0-HXi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejw-xY-ib6">
@@ -357,6 +357,7 @@
         <class className="BIDDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="btnViewOnMapTouch:"/>
                 <relationship kind="action" name="calling:"/>
                 <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="btnGetDirect" candidateClass="UIButton"/>
@@ -394,7 +395,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="un6-ky-7bf"/>
-    </inferredMetricsTieBreakers>
 </document>
