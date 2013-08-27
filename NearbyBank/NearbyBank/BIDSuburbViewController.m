@@ -40,7 +40,7 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"search button clicked");
     //1 - cach 1 : perform view controll ke tiep voi identifier
-//    [self performSegueWithIdentifier:@"BIDNearbyViewController" sender:nil];
+    //    [self performSegueWithIdentifier:@"BIDNearbyViewController" sender:nil];
     
     //2 - tao 1 the hien cua controll ke tiep va dat vao navigation controller
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
@@ -50,11 +50,11 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"BIDNearbyViewController"]) {
-//        BIDNearbyViewController *controller = segue.destinationViewController;
-//        controller.searchInfo = @"asdasd";
-//    }
-//}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"BIDNearbyViewController"]) {
+        BIDNearbyViewController *controller = segue.destinationViewController;
+        controller.searchInfo = @"BIDSuburbViewController";
+    }
+}
 
 @end

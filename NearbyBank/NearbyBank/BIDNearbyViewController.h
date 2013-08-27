@@ -19,11 +19,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *nearbyTable;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *switcher;
-
+@property (strong, nonatomic) NSString *IDViewerReturn ;
 @property (strong, nonatomic) NSString *searchInfo;
 @property (strong, nonatomic) NSString *referenceString; //to query detail place
 @property (strong, nonatomic) NSArray *listData;
-@property (strong, nonatomic) NSString *IDViewerReturn;
 @property (assign, nonatomic) NSInteger indexOfTableReturn;
 
 - (IBAction)segmentValueChange:(id)sender;

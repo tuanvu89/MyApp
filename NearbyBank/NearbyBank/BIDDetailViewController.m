@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
+    
     [self queryPlaceInformation:refecenceString];
 }
 
@@ -53,6 +53,9 @@
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
     controller.IDViewerReturn = @"BIDDetailViewController";
     
+    //tra ve vi tri va du lieu trong bang
+    controller.indexOfTableReturn = self.index;
+    controller.listData = self.listDataReturn;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

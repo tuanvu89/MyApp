@@ -25,10 +25,10 @@
 @synthesize nearbyTable;
 @synthesize mapView;
 @synthesize listData;
-@synthesize IDViewerReturn;
+
 @synthesize indexOfTableReturn;
 
-static NSString* addressFormat = @"vicinity";
+//static NSString* addressFormat;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,30 +37,34 @@ static NSString* addressFormat = @"vicinity";
         // Custom initialization
     }
     return self;
+    
 }
 
 - (void)viewDidLoad
 {
-        [super viewDidLoad];
-        // Do any additional setup after loading the view.
-        self.mapView.delegate = self;
-        // Ensure that you can view your own location in the map view.
-        [self.mapView setShowsUserLocation:YES];
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    //addressFormat = @"vicinity";
+    self.mapView.delegate = self;
+    // Ensure that you can view your own location in the map view.
+    [self.mapView setShowsUserLocation:YES];
     
-        //Instantiate a location object.
-        locationManager = [[CLLocationManager alloc] init];
-        
-        //Make this controller the delegate for the location manager.
-        [locationManager setDelegate:self];
-        
-        //Set some parameters for the location object.
-        [locationManager setDistanceFilter:kCLDistanceFilterNone];
-        [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    //Instantiate a location object.
+    locationManager = [[CLLocationManager alloc] init];
     
-    if ([IDViewerReturn isEqualToString:@"BIDSuburbViewController"]) {
-        addressFormat = @"formatted_address";
+    //Make this controller the delegate for the location manager.
+    [locationManager setDelegate:self];
+    
+    //Set some parameters for the location object.
+    [locationManager setDistanceFilter:kCLDistanceFilterNone];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
+    if ([self.IDViewerReturn isEqualToString:@"BIDDetailViewController"]) {
+        nearbyTable.hidden = YES;
+        self.mapView.hidden = NO;
+        [self.switcher setSelectedSegmentIndex:1];
     }
-   
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,7 +72,6 @@ static NSString* addressFormat = @"vicinity";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     self.listData= nil;
-    self.IDViewerReturn = nil;
     self.mapView = nil;
     self.nearbyTable = nil;
     
@@ -79,26 +82,34 @@ static NSString* addressFormat = @"vicinity";
 -(void) queryGooglePlaces: (NSString *) googleType {
     
     NSString *url = @"";
-    
-    if ([self.IDViewerReturn isEqualToString: @"BIDSuburbViewController"])
+    //neu tro ve tu deteail view thi pin map tai vi tri tra ve
+    if ([self.IDViewerReturn isEqualToString:@"BIDDetailViewController"])
     {
-        NSLog(@"url search -----------------");
-        url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", self.searchInfo, currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+        NSArray *placeToPin = [NSArray arrayWithObject:[listData objectAtIndex:self.indexOfTableReturn]];
+        [self plotPositions:placeToPin];
     }
     else
-   {
-        url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
-   }
-    
-    
-    NSLog(@"%@", url);
-
-    NSURL *googleRequestURL=[NSURL URLWithString:url];
-    
-    dispatch_async(kBgQueue, ^{
-        NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
-        [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
-    });
+    {
+        if ([self.IDViewerReturn isEqualToString: @"BIDSuburbViewController"])
+        {
+            NSLog(@"url search -----------------");
+            url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", self.searchInfo, currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+        }
+        else if(self.IDViewerReturn == nil)
+        {
+            url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+        }
+        
+        
+        NSLog(@"%@", url);
+        
+        NSURL *googleRequestURL=[NSURL URLWithString:url];
+        
+        dispatch_async(kBgQueue, ^{
+            NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
+            [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+        });
+    }
 }
 
 
@@ -114,6 +125,7 @@ static NSString* addressFormat = @"vicinity";
     
     //pin places
     [self plotPositions:places];
+    
     //reload table content
     [self.nearbyTable reloadData];
     
@@ -124,7 +136,7 @@ static NSString* addressFormat = @"vicinity";
 
 
 
-#pragma segment toogle ----------------
+#pragma segment toogle ----------------a
 - (IBAction)segmentValueChange:(id)sender {
     if([sender selectedSegmentIndex] == 0)
     {
@@ -154,11 +166,14 @@ static NSString* addressFormat = @"vicinity";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bankResultCell"];
     UILabel *nameLabel = (UILabel *)[cell viewWithTag:1];
     UILabel *addressLabel = (UILabel *)[cell viewWithTag:2];
-      
+    
     if(listData != nil)
     {
         nameLabel.text = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"name"];
-        addressLabel.text = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:addressFormat];
+        NSString *address = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"vicinity"];
+        if(address == nil)
+            address = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"formatted_address"];
+        addressLabel.text = address;
     }
     
     return cell;
@@ -196,6 +211,7 @@ static NSString* addressFormat = @"vicinity";
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     
+    
     //Get the east and west points on the map so you can calculate the distance (zoom level) of the current map view.
     MKMapRect mRect = self.mapView.visibleMapRect;
     MKMapPoint southMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMinY(mRect));
@@ -210,12 +226,14 @@ static NSString* addressFormat = @"vicinity";
     NSLog(@"la %f", currentCentre.latitude);
     NSLog(@"lo %f", currentCentre.longitude);
     NSLog(@"%d",currenDist);
-    
+    NSLog(@"%@", self.IDViewerReturn);
     //load when radius from center not exceed 40 km
     if (currenDist < 40000) {
-      [self queryGooglePlaces:@"bank"];
+        
+        [self queryGooglePlaces:@"bank"];
     }
-
+    
+    
 }
 
 -(void)plotPositions:(NSArray *)data {
@@ -238,7 +256,9 @@ static NSString* addressFormat = @"vicinity";
         
         // 4 - Get your name and address info for adding to a pin.
         NSString *name=[place objectForKey:@"name"];
-        NSString *address=[place objectForKey:addressFormat];
+        NSString *address=[place objectForKey:@"vicinity"];
+        if(address == nil)
+            address = [place objectForKey:@"formatted_address"];
         
         // Create a special variable to hold this coordinate info.
         CLLocationCoordinate2D placeCoord;
@@ -259,9 +279,10 @@ static NSString* addressFormat = @"vicinity";
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     BIDDetailViewController *controller = segue.destinationViewController;
+    //chuyen tiep de luu lai vi tri va du lieu trong table ma khong phai load lai table khi quay tro lai nearbyview
     NSIndexPath *indexPath = [nearbyTable indexPathForCell:sender];
-    indexOfTableReturn = indexPath.row;
-
+    controller.index = [indexPath row];
+    controller.listDataReturn = self.listData;
     controller.refecenceString = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"reference"];
     
 }
