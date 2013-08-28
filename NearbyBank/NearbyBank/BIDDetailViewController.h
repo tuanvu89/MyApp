@@ -23,5 +23,6 @@
 @property (strong, nonatomic) NSArray *listDataReturn;
 - (IBAction)calling:(id)sender;
 - (IBAction)btnViewOnMapTouch:(id)sender;
+- (IBAction)getDirection:(id)sender;
 
 @end

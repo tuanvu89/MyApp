@@ -8,18 +8,20 @@
 
 #import "BIDNearbyViewController.h"
 #import "BIDDetailViewController.h"
+#import <MapKit/MapKit.h>
 
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 #define kGOOGLE_API_KEY @"AIzaSyDpqmJIb0JcL5unRlibKPC0lG_Kb39QLJo"
 
-@interface BIDDetailViewController ()
+@interface BIDDetailViewController ()<CLLocationManagerDelegate>
 
 @end
 
 @implementation BIDDetailViewController
 @synthesize nameLabel,addressLabel,btnGetDirect,btnPhone,btnViewMap, name, address, refecenceString;
 
+static CLLocationCoordinate2D destinationReturnOnDetail;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,14 +51,29 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
 }
 
-- (IBAction)btnViewOnMapTouch:(id)sender {
+-(void) returnDataToNearbyView : (NSString *) IDButtonReturn
+{
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
     controller.IDViewerReturn = @"BIDDetailViewController";
-    
+    if ([IDButtonReturn isEqualToString:@"GetDirection"]) {
+        controller.IDButtonReturn = @"GetDirection";
+        controller.destinationReturn = destinationReturnOnDetail;
+    }
+    if ([IDButtonReturn isEqualToString:@"ViewOnMap"]) {
+        controller.IDButtonReturn = @"ViewOnMap";
+    }
     //tra ve vi tri va du lieu trong bang
     controller.indexOfTableReturn = self.index;
     controller.listData = self.listDataReturn;
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)btnViewOnMapTouch:(id)sender {
+    [self returnDataToNearbyView:@"ViewOnMap"];
+}
+
+- (IBAction)getDirection:(id)sender {
+    [self returnDataToNearbyView:@"GetDirection"];
 }
 
 
@@ -90,5 +107,11 @@
     
     nameLabel.text = [detail objectForKey:@"name"];
     addressLabel.text = [detail objectForKey:@"formatted_address"];
+    
+    CLLocationCoordinate2D curLocation;
+    NSDictionary *vertex=[(NSDictionary*)[detail objectForKey:@"geometry"] objectForKey:@"location"];
+    curLocation.latitude = [[vertex objectForKey:@"lat"] doubleValue];
+    curLocation.longitude = [[vertex objectForKey:@"lng"] doubleValue];
+    destinationReturnOnDetail = curLocation;
 }
 @end

@@ -22,6 +22,8 @@
 		08ECB36F17C3548A002D1138 /* BIDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */; };
 		08ECC82617C5BA9A003932B2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ECC82517C5BA9A003932B2 /* CoreLocation.framework */; };
 		08ECC82A17C5CFA6003932B2 /* BIDMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ECC82917C5CFA6003932B2 /* BIDMapPoint.m */; };
+		08F2060817CDE70C00EDC248 /* CSMapRouteLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F2060717CDE70C00EDC248 /* CSMapRouteLayerView.m */; };
+		08F2060E17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F2060D17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m */; };
 		08F7DDAF17C201E600B3111D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDAE17C201E600B3111D /* UIKit.framework */; };
 		08F7DDB117C201E600B3111D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB017C201E600B3111D /* Foundation.framework */; };
 		08F7DDB317C201E600B3111D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB217C201E600B3111D /* CoreGraphics.framework */; };
@@ -55,11 +57,15 @@
 		080D256617CCAF570058B2AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		080D256817CCAF5D0058B2AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		08ECB36817C31ACA002D1138 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDDetailViewController.h; sourceTree = "<group>"; };
-		08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDDetailViewController.m; sourceTree = "<group>"; };
+		08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BIDDetailViewController.h; path = NearbyBank/BIDDetailViewController.h; sourceTree = "<group>"; };
+		08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIDDetailViewController.m; path = NearbyBank/BIDDetailViewController.m; sourceTree = "<group>"; };
 		08ECC82517C5BA9A003932B2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		08ECC82817C5CFA6003932B2 /* BIDMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDMapPoint.h; sourceTree = "<group>"; };
-		08ECC82917C5CFA6003932B2 /* BIDMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDMapPoint.m; sourceTree = "<group>"; };
+		08ECC82817C5CFA6003932B2 /* BIDMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BIDMapPoint.h; path = NearbyBank/BIDMapPoint.h; sourceTree = "<group>"; };
+		08ECC82917C5CFA6003932B2 /* BIDMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIDMapPoint.m; path = NearbyBank/BIDMapPoint.m; sourceTree = "<group>"; };
+		08F2060617CDE70C00EDC248 /* CSMapRouteLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSMapRouteLayerView.h; path = NearbyBank/CSMapRouteLayerView.h; sourceTree = "<group>"; };
+		08F2060717CDE70C00EDC248 /* CSMapRouteLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSMapRouteLayerView.m; path = NearbyBank/CSMapRouteLayerView.m; sourceTree = "<group>"; };
+		08F2060C17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+DecodePolyline.h"; sourceTree = "<group>"; };
+		08F2060D17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+DecodePolyline.m"; sourceTree = "<group>"; };
 		08F7DDAB17C201E600B3111D /* NearbyBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F7DDAE17C201E600B3111D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		08F7DDB017C201E600B3111D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -78,10 +84,10 @@
 		08F7DDCE17C2080300B3111D /* BIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDViewController.m; sourceTree = "<group>"; };
 		08F7DDD017C2090F00B3111D /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButton.png; sourceTree = "<group>"; };
 		08F7DDD217C2119200B3111D /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButton.png; sourceTree = "<group>"; };
-		08F7DDD417C2214200B3111D /* BIDSuburbViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDSuburbViewController.h; sourceTree = "<group>"; };
-		08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDSuburbViewController.m; sourceTree = "<group>"; };
-		08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDNearbyViewController.h; sourceTree = "<group>"; };
-		08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDNearbyViewController.m; sourceTree = "<group>"; };
+		08F7DDD417C2214200B3111D /* BIDSuburbViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BIDSuburbViewController.h; path = NearbyBank/BIDSuburbViewController.h; sourceTree = "<group>"; };
+		08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIDSuburbViewController.m; path = NearbyBank/BIDSuburbViewController.m; sourceTree = "<group>"; };
+		08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BIDNearbyViewController.h; path = NearbyBank/BIDNearbyViewController.h; sourceTree = "<group>"; };
+		08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIDNearbyViewController.m; path = NearbyBank/BIDNearbyViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +117,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08F205F917CDA5ED00EDC248 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				08F2060C17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.h */,
+				08F2060D17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m */,
+				08F7DDD417C2214200B3111D /* BIDSuburbViewController.h */,
+				08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */,
+				08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */,
+				08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */,
+				08F2060617CDE70C00EDC248 /* CSMapRouteLayerView.h */,
+				08F2060717CDE70C00EDC248 /* CSMapRouteLayerView.m */,
+				08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */,
+				08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */,
+				08ECC82817C5CFA6003932B2 /* BIDMapPoint.h */,
+				08ECC82917C5CFA6003932B2 /* BIDMapPoint.m */,
+			);
+			name = resource;
+			sourceTree = "<group>";
+		};
 		08F7DDA217C201E600B3111D = {
 			isa = PBXGroup;
 			children = (
+				08F205F917CDA5ED00EDC248 /* resource */,
 				08F7DDB417C201E600B3111D /* NearbyBank */,
 				08F7DDAD17C201E600B3111D /* Frameworks */,
 				08F7DDAC17C201E600B3111D /* Products */,
@@ -163,14 +189,6 @@
 				08F7DDCD17C2080300B3111D /* BIDViewController.h */,
 				08F7DDCE17C2080300B3111D /* BIDViewController.m */,
 				08F7DDB517C201E600B3111D /* Supporting Files */,
-				08F7DDD417C2214200B3111D /* BIDSuburbViewController.h */,
-				08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */,
-				08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */,
-				08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */,
-				08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */,
-				08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */,
-				08ECC82817C5CFA6003932B2 /* BIDMapPoint.h */,
-				08ECC82917C5CFA6003932B2 /* BIDMapPoint.m */,
 			);
 			path = NearbyBank;
 			sourceTree = "<group>";
@@ -267,6 +285,8 @@
 				08F7DDD917C222E000B3111D /* BIDNearbyViewController.m in Sources */,
 				08ECB36F17C3548A002D1138 /* BIDDetailViewController.m in Sources */,
 				08ECC82A17C5CFA6003932B2 /* BIDMapPoint.m in Sources */,
+				08F2060817CDE70C00EDC248 /* CSMapRouteLayerView.m in Sources */,
+				08F2060E17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
