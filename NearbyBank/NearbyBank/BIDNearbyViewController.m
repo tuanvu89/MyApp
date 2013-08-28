@@ -104,7 +104,6 @@
         if ([self.IDButtonReturn isEqualToString:@"GetDirection"]) {
             
             [self queryArrayPointDirection];
-            self.router = [[CSMapRouteLayerView alloc] initWithRoute:self.arrayPoint mapView:self.mapView];
         }
     }
     else
@@ -172,12 +171,18 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     
     NSArray *routes =  [json objectForKey:@"routes"];// routes array from JSON response
-    // grab the first route
+
     NSDictionary *route = [routes objectAtIndex:0];
-    // grab the first leg
+    //grab string of overview route
     NSDictionary *overViewPolyline = [route objectForKey:@"overview_polyline"];
     NSString *codeOverViewPoint = [overViewPolyline objectForKey:@"points"];
+    //decode polyline to array of point
     self.arrayPoint = [[NSMutableArray alloc] decodePolyLine:codeOverViewPoint];
+    
+    //draw direction
+    self.router = [[CSMapRouteLayerView alloc] initWithRoute:self.arrayPoint mapView:self.mapView];
+    [self plotPositions:[[NSArray alloc] initWithObjects:[self.listData objectAtIndex:indexOfTableReturn], nil]];
+    
     NSLog(@"%@", self.arrayPoint);
 }
 
