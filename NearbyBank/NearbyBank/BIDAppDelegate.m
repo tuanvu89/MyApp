@@ -7,13 +7,11 @@
 //
 
 #import "BIDAppDelegate.h"
-#import <GoogleMaps/GoogleMaps.h>
 
 @implementation BIDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [GMSServices provideAPIKey:@"AIzaSyDpqmJIb0JcL5unRlibKPC0lG_Kb39QLJo"];
     return YES;
 }
 

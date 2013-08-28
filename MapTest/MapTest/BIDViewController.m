@@ -22,6 +22,8 @@
     //4
     self.mapView.delegate = self;
     //5
+    [self.mapView setShowsUserLocation:YES];
+    
     
     
 }
@@ -39,14 +41,14 @@
     
     //1
     CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 40.740848;
-    zoomLocation.longitude= -73.991145;
+    //zoomLocation.latitude = 40.740848;
+   // zoomLocation.longitude= -73.991145;
     
     CLLocationCoordinate2D curLocation = [[[self.mapView userLocation] location] coordinate];
     BIDMyAnnotation *anno = [[BIDMyAnnotation alloc] initWithCoordinate:zoomLocation title:@"we'r here !"];
     [self.mapView addAnnotation:anno];
     // 2
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.3*METERS_PER_MILE, 0.3*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     [self.mapView setRegion:viewRegion animated:YES];
 
 }

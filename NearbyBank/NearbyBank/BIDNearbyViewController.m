@@ -40,6 +40,7 @@
     
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -131,7 +132,6 @@
     
     //Write out the data to the console.
     NSLog(@"Google Data: %@", places);
-    
 }
 
 

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		080D255117CCAD990058B2AA /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D254F17CCAC3E0058B2AA /* GoogleMaps.framework */; };
-		080D255317CCADFC0058B2AA /* GoogleMaps.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D255217CCADFC0058B2AA /* GoogleMaps.bundle */; };
 		080D255617CCAEDF0058B2AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D255417CCAEDF0058B2AA /* CoreData.framework */; };
 		080D255717CCAEDF0058B2AA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D255517CCAEDF0058B2AA /* CoreText.framework */; };
 		080D255917CCAEEB0058B2AA /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D255817CCAEEB0058B2AA /* GLKit.framework */; };
@@ -20,7 +18,6 @@
 		080D256517CCAF500058B2AA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D256417CCAF500058B2AA /* OpenGLES.framework */; };
 		080D256717CCAF570058B2AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D256617CCAF570058B2AA /* QuartzCore.framework */; };
 		080D256917CCAF5D0058B2AA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080D256817CCAF5D0058B2AA /* SystemConfiguration.framework */; };
-		080D256C17CCAFBA0058B2AA /* BIDGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 080D256B17CCAFB90058B2AA /* BIDGMapViewController.m */; };
 		08ECB36917C31ACA002D1138 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ECB36817C31ACA002D1138 /* MapKit.framework */; };
 		08ECB36F17C3548A002D1138 /* BIDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */; };
 		08ECC82617C5BA9A003932B2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ECC82517C5BA9A003932B2 /* CoreLocation.framework */; };
@@ -57,8 +54,6 @@
 		080D256417CCAF500058B2AA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		080D256617CCAF570058B2AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		080D256817CCAF5D0058B2AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		080D256A17CCAFB90058B2AA /* BIDGMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDGMapViewController.h; sourceTree = "<group>"; };
-		080D256B17CCAFB90058B2AA /* BIDGMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDGMapViewController.m; sourceTree = "<group>"; };
 		08ECB36817C31ACA002D1138 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIDDetailViewController.h; sourceTree = "<group>"; };
 		08ECB36E17C3548A002D1138 /* BIDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIDDetailViewController.m; sourceTree = "<group>"; };
@@ -106,8 +101,6 @@
 				080D255617CCAEDF0058B2AA /* CoreData.framework in Frameworks */,
 				080D255717CCAEDF0058B2AA /* CoreText.framework in Frameworks */,
 				08ECC82617C5BA9A003932B2 /* CoreLocation.framework in Frameworks */,
-				080D255117CCAD990058B2AA /* GoogleMaps.framework in Frameworks */,
-				080D255317CCADFC0058B2AA /* GoogleMaps.bundle in Frameworks */,
 				08ECB36917C31ACA002D1138 /* MapKit.framework in Frameworks */,
 				08F7DDAF17C201E600B3111D /* UIKit.framework in Frameworks */,
 				08F7DDB117C201E600B3111D /* Foundation.framework in Frameworks */,
@@ -172,8 +165,6 @@
 				08F7DDB517C201E600B3111D /* Supporting Files */,
 				08F7DDD417C2214200B3111D /* BIDSuburbViewController.h */,
 				08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */,
-				080D256A17CCAFB90058B2AA /* BIDGMapViewController.h */,
-				080D256B17CCAFB90058B2AA /* BIDGMapViewController.m */,
 				08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */,
 				08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */,
 				08ECB36D17C3548A002D1138 /* BIDDetailViewController.h */,
@@ -276,7 +267,6 @@
 				08F7DDD917C222E000B3111D /* BIDNearbyViewController.m in Sources */,
 				08ECB36F17C3548A002D1138 /* BIDDetailViewController.m in Sources */,
 				08ECC82A17C5CFA6003932B2 /* BIDMapPoint.m in Sources */,
-				080D256C17CCAFBA0058B2AA /* BIDGMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

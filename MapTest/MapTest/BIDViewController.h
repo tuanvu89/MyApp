@@ -11,7 +11,10 @@
 
 #define METERS_PER_MILE 1609.334
 
-@interface BIDViewController : UIViewController <MKMapViewDelegate>
+@interface BIDViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
+{
+        CLLocationManager *locationManager;
+}
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
