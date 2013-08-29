@@ -8,7 +8,7 @@
 
 #import "BIDNearbyViewController.h"
 #import "BIDDetailViewController.h"
-#import "NSMutableArray+DecodePolyline.h"
+#import "NSString+DecodePolyline.h"
 #import "BIDMapPoint.h"
 
 #define METERS_PER_MILE 1609.344
@@ -155,35 +155,30 @@
     CLLocationCoordinate2D userlocation= self.mapView.userLocation.coordinate;
     
     NSString *url = [[NSString alloc] initWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%f,%f&destination=%f,%f&sensor=false",userlocation.latitude,userlocation.longitude,destinationReturn.latitude, destinationReturn.longitude];
-     NSLog(@"i am hereeeeeeeeeeee %@", url);
     NSURL *RequestURL=[NSURL URLWithString:url];
-  
+    
     dispatch_async(kBgQueue, ^{
-        NSLog(@"i am hereeeeeeeeeeee11111");
         NSData* data1 = [NSData dataWithContentsOfURL: RequestURL];
         [self performSelectorOnMainThread:@selector(fetchedDataDirection:) withObject:data1 waitUntilDone:YES];
     });
 }
 
 - (void)fetchedDataDirection:(NSData *)responseData {
-     NSLog(@"i am hereeeeeeeeeeee22222");
     NSError* error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     
     NSArray *routes =  [json objectForKey:@"routes"];// routes array from JSON response
-
+    
     NSDictionary *route = [routes objectAtIndex:0];
     //grab string of overview route
     NSDictionary *overViewPolyline = [route objectForKey:@"overview_polyline"];
     NSString *codeOverViewPoint = [overViewPolyline objectForKey:@"points"];
     //decode polyline to array of point
-    self.arrayPoint = [[NSMutableArray alloc] decodePolyLine:codeOverViewPoint];
-    
+    //self.arrayPoint = [[NSMutableArray alloc] decodePolyLine:codeOverViewPoint];
+    self.arrayPoint = [codeOverViewPoint decodePolyLine];
     //draw direction
     self.router = [[CSMapRouteLayerView alloc] initWithRoute:self.arrayPoint mapView:self.mapView];
     [self plotPositions:[[NSArray alloc] initWithObjects:[self.listData objectAtIndex:indexOfTableReturn], nil]];
-    
-    NSLog(@"%@", self.arrayPoint);
 }
 
 #pragma segment toogle ----------------a
@@ -272,11 +267,6 @@
     
     //Set your current center point on the map instance variable.
     currentCentre = self.mapView.centerCoordinate;
-    
-    NSLog(@"la %f", currentCentre.latitude);
-    NSLog(@"lo %f", currentCentre.longitude);
-    NSLog(@"%d",currenDist);
-    NSLog(@"%@", self.IDViewerReturn);
     
     //load when radius from center not exceed 40 km
     if (currenDist < 40000) {

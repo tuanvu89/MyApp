@@ -1,20 +1,19 @@
 //
-//  NSMutableArray+DecodePolyline.m
+//  NSString+DecodePolyline.m
 //  NearbyBank
 //
-//  Created by kerofrog on 8/28/13.
+//  Created by kerofrog on 8/29/13.
 //  Copyright (c) 2013 kerofrog. All rights reserved.
 //
 
-#import "NSMutableArray+DecodePolyline.h"
+#import "NSString+DecodePolyline.h"
 
-@implementation NSMutableArray (DecodePolyline)
-
+@implementation NSString (DecodePolyline)
 
 //decode polyline
--(NSMutableArray *)decodePolyLine:(NSString *)encodedStr {
-    NSMutableString *encoded = [[NSMutableString alloc] initWithCapacity:[encodedStr length]];
-    [encoded appendString:encodedStr];
+-(NSMutableArray *)decodePolyLine{
+    NSMutableString *encoded = [[NSMutableString alloc] initWithCapacity:[self length]];
+    [encoded appendString:self];
     //    [encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
     //                                options:NSLiteralSearch
     //                                  range:NSMakeRange(0, [encoded length])];
@@ -54,9 +53,9 @@
 }
 
 //decode polyline level
--(NSMutableArray *)decodePolyLineLevel:(NSString *)encodedStr {
-    NSMutableString *encoded = [[NSMutableString alloc] initWithCapacity:[encodedStr length]];
-    [encoded appendString:encodedStr];
+-(NSMutableArray *)decodePolyLineLevel {
+    NSMutableString *encoded = [[NSMutableString alloc] initWithCapacity:[self length]];
+    [encoded appendString:self];
     //    [encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
     //                                options:NSLiteralSearch
     //                                  range:NSMakeRange(0, [encoded length])];

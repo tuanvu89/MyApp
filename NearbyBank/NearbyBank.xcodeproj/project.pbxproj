@@ -23,7 +23,6 @@
 		08ECC82617C5BA9A003932B2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ECC82517C5BA9A003932B2 /* CoreLocation.framework */; };
 		08ECC82A17C5CFA6003932B2 /* BIDMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 08ECC82917C5CFA6003932B2 /* BIDMapPoint.m */; };
 		08F2060817CDE70C00EDC248 /* CSMapRouteLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F2060717CDE70C00EDC248 /* CSMapRouteLayerView.m */; };
-		08F2060E17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F2060D17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m */; };
 		08F7DDAF17C201E600B3111D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDAE17C201E600B3111D /* UIKit.framework */; };
 		08F7DDB117C201E600B3111D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB017C201E600B3111D /* Foundation.framework */; };
 		08F7DDB317C201E600B3111D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DDB217C201E600B3111D /* CoreGraphics.framework */; };
@@ -39,6 +38,7 @@
 		08F7DDD317C2119200B3111D /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 08F7DDD217C2119200B3111D /* whiteButton.png */; };
 		08F7DDD617C2214200B3111D /* BIDSuburbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */; };
 		08F7DDD917C222E000B3111D /* BIDNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */; };
+		08FB170B17CEE8D300F2FE53 /* NSString+DecodePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB170A17CEE8D300F2FE53 /* NSString+DecodePolyline.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,8 +64,6 @@
 		08ECC82917C5CFA6003932B2 /* BIDMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIDMapPoint.m; path = NearbyBank/BIDMapPoint.m; sourceTree = "<group>"; };
 		08F2060617CDE70C00EDC248 /* CSMapRouteLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSMapRouteLayerView.h; path = NearbyBank/CSMapRouteLayerView.h; sourceTree = "<group>"; };
 		08F2060717CDE70C00EDC248 /* CSMapRouteLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSMapRouteLayerView.m; path = NearbyBank/CSMapRouteLayerView.m; sourceTree = "<group>"; };
-		08F2060C17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+DecodePolyline.h"; sourceTree = "<group>"; };
-		08F2060D17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+DecodePolyline.m"; sourceTree = "<group>"; };
 		08F7DDAB17C201E600B3111D /* NearbyBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F7DDAE17C201E600B3111D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		08F7DDB017C201E600B3111D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,6 +86,8 @@
 		08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIDSuburbViewController.m; path = NearbyBank/BIDSuburbViewController.m; sourceTree = "<group>"; };
 		08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BIDNearbyViewController.h; path = NearbyBank/BIDNearbyViewController.h; sourceTree = "<group>"; };
 		08F7DDD817C222E000B3111D /* BIDNearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BIDNearbyViewController.m; path = NearbyBank/BIDNearbyViewController.m; sourceTree = "<group>"; };
+		08FB170917CEE8D300F2FE53 /* NSString+DecodePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DecodePolyline.h"; sourceTree = "<group>"; };
+		08FB170A17CEE8D300F2FE53 /* NSString+DecodePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DecodePolyline.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +120,8 @@
 		08F205F917CDA5ED00EDC248 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				08F2060C17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.h */,
-				08F2060D17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m */,
+				08FB170917CEE8D300F2FE53 /* NSString+DecodePolyline.h */,
+				08FB170A17CEE8D300F2FE53 /* NSString+DecodePolyline.m */,
 				08F7DDD417C2214200B3111D /* BIDSuburbViewController.h */,
 				08F7DDD517C2214200B3111D /* BIDSuburbViewController.m */,
 				08F7DDD717C222E000B3111D /* BIDNearbyViewController.h */,
@@ -286,7 +286,7 @@
 				08ECB36F17C3548A002D1138 /* BIDDetailViewController.m in Sources */,
 				08ECC82A17C5CFA6003932B2 /* BIDMapPoint.m in Sources */,
 				08F2060817CDE70C00EDC248 /* CSMapRouteLayerView.m in Sources */,
-				08F2060E17CDEF8800EDC248 /* NSMutableArray+DecodePolyline.m in Sources */,
+				08FB170B17CEE8D300F2FE53 /* NSString+DecodePolyline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
