@@ -23,6 +23,29 @@
 
 static CLLocationCoordinate2D destinationReturnOnDetail;
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self setFrame:[self interfaceOrientation]];
+}
+
+-(void)setFrame:(UIInterfaceOrientation) interfaceOrientation{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+        self.btnPhone.frame = CGRectMake(20, 190, 280, 60);
+        self.btnViewMap.frame = CGRectMake(20, 260, 280, 60);
+        self.btnGetDirect.frame = CGRectMake(20, 330, 280, 60);
+    }else
+    {
+        self.btnPhone.frame = CGRectMake(20, 110, 220, 60);
+        self.btnViewMap.frame = CGRectMake(250, 110, 220, 60);
+        self.btnGetDirect.frame = CGRectMake(20, 180, 450, 60);
+    }
+}
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self setFrame:toInterfaceOrientation];
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,6 +59,19 @@ static CLLocationCoordinate2D destinationReturnOnDetail;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    UIImage *btnImageNormal = [UIImage imageNamed:@"whiteButton.png"];
+    UIImage *btnImagePress = [UIImage imageNamed:@"BlueButton.png"];
+    
+    UIImage *stretchabeImgNormal = [btnImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    UIImage *stretchableImgPress = [btnImagePress stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    
+    [btnGetDirect setBackgroundImage:stretchabeImgNormal forState:UIControlStateNormal];
+    [btnPhone setBackgroundImage:stretchabeImgNormal forState:UIControlStateNormal];
+    [btnViewMap setBackgroundImage:stretchabeImgNormal forState:UIControlStateNormal];
+    
+    [btnGetDirect setBackgroundImage:stretchableImgPress forState:UIControlStateHighlighted];
+    [btnPhone setBackgroundImage:stretchableImgPress forState:UIControlStateHighlighted];
+    [btnViewMap setBackgroundImage:stretchableImgPress forState:UIControlStateHighlighted];
     
     [self queryPlaceInformation:refecenceString];
 }

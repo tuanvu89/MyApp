@@ -317,6 +317,7 @@
 
 #pragma segue
 
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     BIDDetailViewController *controller = segue.destinationViewController;

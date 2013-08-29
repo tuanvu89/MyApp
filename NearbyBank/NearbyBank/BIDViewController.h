@@ -12,6 +12,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnNearby;
 @property (strong, nonatomic) IBOutlet UIButton *btnBySuburb;
 @property (strong, nonatomic) IBOutlet UIButton *btnAdSearch;
+@property (strong, nonatomic) IBOutlet UILabel *lblTitle;
+@property (strong, nonatomic) IBOutlet UIView *myView;
 
 
 @end

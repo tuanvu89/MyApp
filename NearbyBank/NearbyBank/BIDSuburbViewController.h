@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BIDSuburbViewController : UIViewController <UISearchBarDelegate>
+@interface BIDSuburbViewController : UIViewController <UISearchBarDelegate, UINavigationBarDelegate>
 
 @end
