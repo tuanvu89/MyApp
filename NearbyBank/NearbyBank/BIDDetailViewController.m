@@ -59,6 +59,8 @@ static CLLocationCoordinate2D destinationReturnOnDetail;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //modify button image
     UIImage *btnImageNormal = [UIImage imageNamed:@"whiteButton.png"];
     UIImage *btnImagePress = [UIImage imageNamed:@"BlueButton.png"];
     
@@ -80,6 +82,10 @@ static CLLocationCoordinate2D destinationReturnOnDetail;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.name = nil;
+    self.address = nil;
+    self.refecenceString = nil;
+    self.listDataReturn = nil;
 }
 
 - (IBAction)calling:(id)sender {
@@ -101,6 +107,7 @@ static CLLocationCoordinate2D destinationReturnOnDetail;
     //tra ve vi tri va du lieu trong bang
     controller.indexOfTableReturn = self.indexReturn;
     controller.listData = self.listDataReturn;
+    controller.wasDrawDirection = NO;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

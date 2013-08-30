@@ -13,6 +13,7 @@
 {
     CLLocationCoordinate2D currentCentre;
     int currenDist;
+    MKMapRect mapRect;
 }
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *nearbyTable;
@@ -41,6 +42,10 @@
 //route line on map
 @property (strong, nonatomic) MKPolyline *routeLine;
 @property (strong, nonatomic) MKPolylineView *routeView;
+
+//confirm searching
+@property (nonatomic) bool wasSearched;
+@property (nonatomic) bool wasDrawDirection;
 
 - (IBAction)segmentValueChange:(id)sender;
 

@@ -39,7 +39,6 @@
 @synthesize routeView;
 
 
-//static NSString* addressFormat;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,6 +63,8 @@
     // Ensure that you can view your own location in the map view.
     [self.mapView setShowsUserLocation:YES];
     
+    self.wasSearched = NO;
+    
     if ([self.IDViewerReturn isEqualToString:@"BIDDetailViewController"]) {
         nearbyTable.hidden = YES;
         self.mapView.hidden = NO;
@@ -86,6 +87,7 @@
     self.referenceString = nil;
     self.IDButtonReturn = nil;
     self.IDViewerReturn = nil;
+    self.wasSearched = nil;
 }
 
 #pragma mark Get google place information
@@ -102,7 +104,7 @@
             [self plotPositions:placeToPin];
         }
         
-        if ([self.IDButtonReturn isEqualToString:@"GetDirection"]) {
+        if ([self.IDButtonReturn isEqualToString:@"GetDirection"] && self.wasDrawDirection == NO) {
             
             [self queryArrayPointDirection];
         }
@@ -112,6 +114,7 @@
         if ([self.IDViewerReturn isEqualToString: @"BIDSuburbViewController"])
         {
             url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", self.searchString, currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+             self.wasSearched = YES;
         }
         else if(self.IDViewerReturn == nil)
         {
@@ -124,11 +127,19 @@
         
         dispatch_async(kBgQueue, ^{
             NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
-            [self performSelectorOnMainThread:@selector(fetchedDataGooglePlace:) withObject:data waitUntilDone:YES];
+            if (data != nil) {
+                [self performSelectorOnMainThread:@selector(fetchedDataGooglePlace:) withObject:data waitUntilDone:YES];
+            }else{
+                [self performSelectorOnMainThread:@selector(alertDataNull:) withObject:@"No data respones, check your internet connection." waitUntilDone:NO];
+            }
         });
     }
 }
 
+-(void) alertDataNull: (NSString *) messages{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notify !" message:messages delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alert show];
+}
 
 - (void)fetchedDataGooglePlace:(NSData *)responseData {
     NSError* error;
@@ -136,16 +147,23 @@
     
     //The results from Google will be an array obtained from the NSDictionary object with the key "results".
     NSArray* places = [json objectForKey:@"results"];
+    NSString *status = [json objectForKey:@"status"];
     
-    //get data to listdata
-    listData = places;
-    
-    //pin places
-    [self plotPositions:places];
-    
-    //reload table content
-    [self.nearbyTable reloadData];
-    
+    if ([status isEqualToString:@"ZERO_RESULTS"]) {
+        if([self.IDViewerReturn isEqualToString: @"BIDSuburbViewController"])
+            [self alertDataNull:[NSString stringWithFormat:@"There is no banking have name like: \"%@\"!", self.searchString]];
+        else
+            [self alertDataNull:@"There is no banking around here !"];
+    }else{
+        //get data to listdata
+        listData = places;
+        
+        //pin places
+        [self plotPositions:places];
+        
+        //reload table content
+        [self.nearbyTable reloadData];
+    }
     //Write out the data to the console.
     NSLog(@"Google Data: %@", places);
 }
@@ -159,12 +177,16 @@
     NSString *url = [[NSString alloc] initWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%f,%f&destination=%f,%f&sensor=false",userlocation.latitude,userlocation.longitude,destinationReturn.latitude, destinationReturn.longitude];
     
     NSLog(@"\n URL ::::::::::::::::::::::::::::::::\n %@", url);
-    
+    self.wasDrawDirection = YES;
     NSURL *RequestURL=[NSURL URLWithString:url];
     
     dispatch_async(kBgQueue, ^{
         NSData* data1 = [NSData dataWithContentsOfURL: RequestURL];
-        [self performSelectorOnMainThread:@selector(fetchedDataDirection:) withObject:data1 waitUntilDone:YES];
+        if (data1 != nil) {
+            [self performSelectorOnMainThread:@selector(fetchedDataDirection:) withObject:data1 waitUntilDone:YES];
+        }else{
+            [self performSelectorOnMainThread:@selector(alertDataNull:) withObject:@"No data respones, check your internet connection." waitUntilDone:NO];
+        }
     });
 }
 
@@ -179,7 +201,7 @@
     //grab string of overview route
     NSDictionary *overViewPolyline = [route objectForKey:@"overview_polyline"];
     NSString *codeOverViewPoint = [overViewPolyline objectForKey:@"points"];
-
+    
     //decode string of array point from google polyline encode
     self.arrayPoint = [codeOverViewPoint decodePolyLine];
     
@@ -199,8 +221,10 @@
     //show direction
     self.routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:arrayPoint.count];
     if(self.routeLine != nil){
-       [self.mapView addOverlay:self.routeLine];
+        [self.mapView addOverlay:self.routeLine];
     }
+    
+    [self zoomInOnRoute];
 }
 
 #pragma segment toogle
@@ -285,14 +309,15 @@
     //Set your current center point on the map instance variable.
     currentCentre = self.mapView.centerCoordinate;
     
-    //load when radius from center not exceed 40 km
-    if (currenDist < 40000) {
+    //load when radius from center not exceed 40 km or search url was executed
+    if (currenDist < 40000 && self.wasSearched == NO) {
         
         [self queryGooglePlaces:@"bank"];
     }
     
     
 }
+
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
 	MKOverlayView* overlayView = nil;
@@ -314,6 +339,39 @@
 	
 	return overlayView;
 	
+}
+
+-(void) zoomInOnRoute{
+//    MKMapPoint NorthEastPoint;
+//    MKMapPoint SouthWestPoint;
+//    MKMapPoint destination = MKMapPointMake(self.destinationReturn.latitude, self.destinationReturn.longitude);
+//    
+//    CLLocationCoordinate2D curLocation = self.mapView.userLocation.coordinate;
+//    
+//    
+//    if (destination.x > curLocation.latitude) {
+//        NorthEastPoint.x = destination.x;
+//        SouthWestPoint.x = curLocation.latitude;
+//    }else{
+//        NorthEastPoint.x = curLocation.latitude;
+//        SouthWestPoint.x = destination.x;
+//    }
+//    
+//    if (destination.y > curLocation.longitude) {
+//        NorthEastPoint.y = destination.y;
+//        SouthWestPoint.y = curLocation.longitude;
+//    }else{
+//        NorthEastPoint.y = curLocation.longitude;
+//        SouthWestPoint.y = destination.y;
+//    }
+//    
+//    mapRect = MKMapRectMake(SouthWestPoint.x, SouthWestPoint.y, NorthEastPoint.x - SouthWestPoint.x, NorthEastPoint.y - SouthWestPoint.y);
+//    
+//    [self.mapView setVisibleMapRect:mapRect];
+//    
+//    NSLog(@"%f,%f", SouthWestPoint.x,SouthWestPoint.y);
+//    
+//    NSLog(@"%f", NorthEastPoint.x - SouthWestPoint.x);
 }
 
 -(void)plotPositions:(NSArray *)data {

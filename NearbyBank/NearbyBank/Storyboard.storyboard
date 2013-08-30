@@ -189,7 +189,6 @@
                                             </connections>
                                         </segmentedControl>
                                     </barButtonItem>
-                                    <barButtonItem title="Refine" id="3GP-HM-Wsb"/>
                                 </items>
                             </toolbar>
                         </subviews>

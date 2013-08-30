@@ -44,8 +44,11 @@
     
     //2 - tao 1 the hien cua controll ke tiep va dat vao navigation controller
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
+    
+    //modify text to be accepted by Search API
     controller.searchString = [searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     controller.IDViewerReturn = @"BIDSuburbViewController";
+    controller.wasSearched = NO;
     
     [self.navigationController pushViewController:controller animated:YES];
 }
