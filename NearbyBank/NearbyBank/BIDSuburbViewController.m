@@ -44,17 +44,17 @@
     
     //2 - tao 1 the hien cua controll ke tiep va dat vao navigation controller
     BIDNearbyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"BIDNearbyViewController"];
-    controller.searchInfo = [searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    controller.searchString = [searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     controller.IDViewerReturn = @"BIDSuburbViewController";
     
     [self.navigationController pushViewController:controller animated:YES];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"BIDNearbyViewController"]) {
-        BIDNearbyViewController *controller = segue.destinationViewController;
-        controller.searchInfo = @"BIDSuburbViewController";
-    }
-}
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"BIDNearbyViewController"]) {
+//        BIDNearbyViewController *controller = segue.destinationViewController;
+//        controller.searchInfo = @"BIDSuburbViewController";
+//    }
+//}
 
 @end

@@ -23,11 +23,11 @@
 
 
 @implementation BIDNearbyViewController
+
 @synthesize nearbyTable;
-@synthesize searchInfo;
+@synthesize searchString;
 @synthesize mapView;
 @synthesize listData;
-@synthesize router;
 @synthesize indexOfTableReturn;
 @synthesize referenceString;
 @synthesize IDButtonReturn;
@@ -35,6 +35,8 @@
 @synthesize switcher;
 @synthesize arrayPoint;
 @synthesize destinationReturn;
+@synthesize routeLine;
+@synthesize routeView;
 
 
 //static NSString* addressFormat;
@@ -49,6 +51,9 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 
 - (void)viewDidLoad
 {
@@ -58,16 +63,6 @@
     self.mapView.delegate = self;
     // Ensure that you can view your own location in the map view.
     [self.mapView setShowsUserLocation:YES];
-    
-    //Instantiate a location object.
-    locationManager = [[CLLocationManager alloc] init];
-    
-    //Make this controller the delegate for the location manager.
-    [locationManager setDelegate:self];
-    
-    //Set some parameters for the location object.
-    [locationManager setDistanceFilter:kCLDistanceFilterNone];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
     if ([self.IDViewerReturn isEqualToString:@"BIDDetailViewController"]) {
         nearbyTable.hidden = YES;
@@ -82,18 +77,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     self.listData= nil;
+    self.switcher = nil;
     self.mapView = nil;
     self.nearbyTable = nil;
-    
+    self.searchString = nil;
+    self.routeLine = nil;
+    self.routeView = nil;
+    self.referenceString = nil;
+    self.IDButtonReturn = nil;
+    self.IDViewerReturn = nil;
 }
 
-#pragma JSON
+#pragma mark Get google place information
 
 -(void) queryGooglePlaces: (NSString *) googleType {
     
     NSString *url = @"";
     
-    //neu tro ve tu deteail view thi pin map tai vi tri tra ve
+    //indentify IDViewer return to confirm next action
     if ([self.IDViewerReturn isEqualToString:@"BIDDetailViewController"])
     {
         if ([self.IDButtonReturn isEqualToString:@"ViewOnMap"]) {
@@ -110,15 +111,14 @@
     {
         if ([self.IDViewerReturn isEqualToString: @"BIDSuburbViewController"])
         {
-            url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", self.searchInfo, currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
+            url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", self.searchString, currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
         }
         else if(self.IDViewerReturn == nil)
         {
             url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%@&types=%@&sensor=true&key=%@", currentCentre.latitude, currentCentre.longitude, [NSString stringWithFormat:@"%i", currenDist], googleType, kGOOGLE_API_KEY];
         }
         
-        
-        NSLog(@"%@", url);
+        NSLog(@"\n URL ::::::::::::::::::::::::::::::::\n %@", url);
         
         NSURL *googleRequestURL=[NSURL URLWithString:url];
         
@@ -150,11 +150,16 @@
     NSLog(@"Google Data: %@", places);
 }
 
+#pragma mark Get google direction information
+
 -(void) queryArrayPointDirection{
     
     CLLocationCoordinate2D userlocation= self.mapView.userLocation.coordinate;
     
     NSString *url = [[NSString alloc] initWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%f,%f&destination=%f,%f&sensor=false",userlocation.latitude,userlocation.longitude,destinationReturn.latitude, destinationReturn.longitude];
+    
+    NSLog(@"\n URL ::::::::::::::::::::::::::::::::\n %@", url);
+    
     NSURL *RequestURL=[NSURL URLWithString:url];
     
     dispatch_async(kBgQueue, ^{
@@ -170,18 +175,36 @@
     NSArray *routes =  [json objectForKey:@"routes"];// routes array from JSON response
     
     NSDictionary *route = [routes objectAtIndex:0];
+    
     //grab string of overview route
     NSDictionary *overViewPolyline = [route objectForKey:@"overview_polyline"];
     NSString *codeOverViewPoint = [overViewPolyline objectForKey:@"points"];
-    //decode polyline to array of point
-    //self.arrayPoint = [[NSMutableArray alloc] decodePolyLine:codeOverViewPoint];
+
+    //decode string of array point from google polyline encode
     self.arrayPoint = [codeOverViewPoint decodePolyLine];
-    //draw direction
-    self.router = [[CSMapRouteLayerView alloc] initWithRoute:self.arrayPoint mapView:self.mapView];
+    
+    //pin destination
     [self plotPositions:[[NSArray alloc] initWithObjects:[self.listData objectAtIndex:indexOfTableReturn], nil]];
+    
+    //convert array of location to array of cllocationCooordinate2D
+    CLLocationCoordinate2D coordinateArray[self.arrayPoint.count];
+    for(int idx = 0; idx < self.arrayPoint.count; idx++)
+    {
+        CLLocation *loc = [self.arrayPoint objectAtIndex:idx];
+        // create our coordinate and add it to the correct spot in the array
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([loc coordinate].latitude, [loc coordinate].longitude);
+        coordinateArray[idx] = coordinate;
+    }
+    
+    //show direction
+    self.routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:arrayPoint.count];
+    if(self.routeLine != nil){
+       [self.mapView addOverlay:self.routeLine];
+    }
 }
 
-#pragma segment toogle ----------------a
+#pragma segment toogle
+
 - (IBAction)segmentValueChange:(id)sender {
     if([sender selectedSegmentIndex] == 0)
     {
@@ -195,7 +218,8 @@
     }
 }
 
-#pragma table ------------------
+#pragma mark Table method
+
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -224,14 +248,7 @@
     return cell;
 }
 
-#pragma Map View
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-#pragma mark -MapView Delegate Methods
+#pragma mark MapView Delegate Methods
 
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
@@ -276,6 +293,28 @@
     
     
 }
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
+{
+	MKOverlayView* overlayView = nil;
+	
+	if(overlay == self.routeLine)
+	{
+		//if we have not yet created an overlay view for this overlay, create it now.
+		if(nil == self.routeView)
+		{
+			self.routeView = [[MKPolylineView alloc] initWithPolyline:self.routeLine];
+			self.routeView.fillColor = [UIColor redColor];
+			self.routeView.strokeColor = [UIColor redColor];
+			self.routeView.lineWidth = 3;
+		}
+		
+		overlayView = self.routeView;
+		
+	}
+	
+	return overlayView;
+	
+}
 
 -(void)plotPositions:(NSArray *)data {
     // 1 - Remove any existing custom annotations but not the user location blue dot.
@@ -315,7 +354,7 @@
     }
 }
 
-#pragma segue
+#pragma Navigation
 
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -323,7 +362,7 @@
     BIDDetailViewController *controller = segue.destinationViewController;
     //chuyen tiep de luu lai vi tri va du lieu trong table ma khong phai load lai table khi quay tro lai nearbyview
     NSIndexPath *indexPath = [nearbyTable indexPathForCell:sender];
-    controller.index = [indexPath row];
+    controller.indexReturn = [indexPath row];
     controller.listDataReturn = self.listData;
     controller.refecenceString = [(NSDictionary*)[listData objectAtIndex:indexPath.row] objectForKey:@"reference"];
     

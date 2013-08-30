@@ -99,7 +99,7 @@ static CLLocationCoordinate2D destinationReturnOnDetail;
         controller.IDButtonReturn = @"ViewOnMap";
     }
     //tra ve vi tri va du lieu trong bang
-    controller.indexOfTableReturn = self.index;
+    controller.indexOfTableReturn = self.indexReturn;
     controller.listData = self.listDataReturn;
     [self.navigationController pushViewController:controller animated:YES];
 }

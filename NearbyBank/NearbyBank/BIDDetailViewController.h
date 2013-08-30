@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSString *refecenceString;
-@property ( nonatomic) NSInteger index;
+@property ( nonatomic) NSInteger indexReturn;
 @property (strong, nonatomic) NSArray *listDataReturn;
 - (IBAction)calling:(id)sender;
 - (IBAction)btnViewOnMapTouch:(id)sender;
